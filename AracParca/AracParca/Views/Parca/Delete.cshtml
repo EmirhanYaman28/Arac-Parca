@@ -1,0 +1,45 @@
+﻿@model Parca
+
+@{
+    ViewData["Title"] = "Parçaları Görüntüle";
+}
+
+<title>@ViewData["Title"]</title>
+
+<style>
+    .imageThumbnail {
+        max-width: 500px; 
+        max-height: 700px;
+    }
+</style>
+
+<div class="container shadow p-5">
+    <h1 class="text-center"><b>Parça Bilgisi</b></h1>
+
+    <form method="post" asp-action="DeleteProduct">
+        <input asp-for="Id" hidden />
+        <div class="card shadow p-3">
+            <div class="card-body">
+                <!-- Resim ekleme kısmı -->
+                <div class="card-body text-center">
+                    <img class="card-img-top imageThumbnail" src="~/images/@(Model.PhotoPath ?? "noimage.jpg")" asp-append-version="true" />
+                </div>
+
+                <div class="card-text"><strong>Açıklama: </strong>@Model.ModelAralik</div>
+                <hr />
+                <div class="card-text"><strong>Kategori: </strong>@Model.ArabaMarka</div>
+                <hr />
+                <div class="card-text"><strong>Model: </strong>@Model.ArabaModel</div>
+                <hr />
+                <div class="card-text"><strong>Bölüm: </strong>@Model.Bolum</div>
+                <hr />
+                <h6 class="card-text"><strong>Fiyat: </strong>@Model.Fiyatı</h6>
+
+                <button type="submit" class="btn btn-danger">Sil</button>
+            </div>
+        </div>
+    </form>
+    <br />
+
+    <a asp-action="Index" type="button" class="btn btn-dark">Listeye Geri Dön</a>
+</div>

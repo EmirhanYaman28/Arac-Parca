@@ -1,0 +1,75 @@
+﻿@model CreateViewParca
+
+@{
+    ViewData["Title"] = "Parçayı Düzenle";
+    var photoPath = "~/images/" + Model.PhotoFileName;
+}
+
+<title>@ViewData["Title"]</title>
+
+<style>
+    .imageThumbnail {
+        max-width: 500px; /* Maksimum genişlik */
+        max-height: 600px; /* Maksimum yükseklik */
+    }
+</style>
+
+<div class="container shadow p-5">
+    <div class="row pb-2">
+        <h1>Parça Düzenle</h1>
+    </div>
+
+    <form method="post" class="form-floating" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+
+               <div class="form-floating mb-3">
+            <input type="text" class="form-control" asp-for="Id" placeholder="Enter product name" readonly="readonly" />
+            <label asp-for="Id">Product Id</label>
+        </div>
+
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" asp-for="ModelAralik" placeholder="Model Aralığını giriniz" />
+            <label asp-for="ModelAralik">Model Aralığı</label>
+            <span asp-validation-for="ModelAralik" class="alert-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" asp-for="ArabaMarka" placeholder="Araba Markasını giriniz" />
+            <label asp-for="ArabaMarka">Araba Marka</label>
+            <span asp-validation-for="ArabaMarka" class="alert-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" asp-for="ArabaModel" placeholder="Araba Model giriniz" />
+            <label asp-for="ArabaModel">Araba Model</label>
+            <span asp-validation-for="ArabaModel" class="alert-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" asp-for="Bolum" placeholder="Araba Bolumü Yazınız." />
+            <label asp-for="Bolum">Araba Model</label>
+            <span asp-validation-for="Bolum" class="alert-danger"></span>
+        </div>
+
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" asp-for="Fiyatı" placeholder="Fiyatı adı giriniz" />
+            <label asp-for="Fiyatı">Fiyatı</label>
+            <span asp-validation-for="Fiyatı" class="alert-danger"></span>
+        </div>
+
+        <div class="card-body text-center">
+            <img class="card-img-top imageThumbnail" src="@photoPath" asp-append-version="true" />
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="file" class="form-control custom-file-input" asp-for="Photo" placeholder="Ürün fotoğrafını seçiniz." />
+            <label asp-for="Photo" class="custom-file-label">Photo</label>
+            <span asp-validation-for="Photo" class="alert-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Güncelle</button>
+        <a asp-action="Index" class="btn btn-primary">Listeye Geri Dön</a>
+    </form>
+</div>

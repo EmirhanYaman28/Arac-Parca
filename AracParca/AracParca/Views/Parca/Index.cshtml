@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Parca>
+
+@{
+    ViewData["Title"] = "Parça Listesi";
+}
+
+<title>@ViewData["Title"]</title>
+
+<style>
+    .imageThumbnail {
+        max-width: 150px;
+        max-height: 200px;
+    }
+</style>
+
+<div class="container shadow p-5">
+
+    <h1 class="text-center">Araç Parça Satış Sitesi</h1>
+    <div class="col mb-3">
+        <a asp-action="Create" class="btn btn-primary">
+            Parça Ekle
+        </a>
+    </div>
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th class="text-center">Fotoğraf</th>
+                <th class="text-center">Fiyat</th>
+                <th class="text-center">Model Aralığı</th>
+                <th class="text-center">Araba Marka</th>
+                <th class="text-center">Araba Model</th>
+                <th class="text-center">Bölüm</th>
+                <th class="text-center">İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var photoPath = "~/images/" + (item.PhotoPath ?? "noimage.jpg");
+
+                <div>
+                <tr>
+                    <td class="text-center">
+                        <div class="card-body text-center">
+                            <a href="/Parca/Görüntüle/@item.Id">
+                                <img class="card-img-top imageThumbnail" src="@photoPath" asp-append-version="true" />
+                            </a>
+                        </div>
+                    </td>                                       
+                    <td class="text-center" style="line-height:150px">@item.Fiyatı</td>
+                    <td class="text-center" style="line-height:150px">@item.ModelAralik</td>
+                    <td class="text-center" style="line-height:150px">@item.ArabaMarka</td>
+                    <td class="text-center" style="line-height:150px">@item.ArabaModel</td>
+                    <td class="text-center" style="line-height:150px">@item.Bolum</td>
+                    <td class="text-center" style="line-height:150px">
+                        <a asp-action="Edit" asp-route-Id="@item.Id" class="btn btn-success">Düzenle</a>
+                        <a asp-action="Delete" asp-route-Id="@item.Id" class="btn btn-danger">Sil</a>
+                    </td>
+                </tr>
+            </div>
+            }
+        </tbody>
+    </table>
+</div>
